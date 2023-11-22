@@ -1,0 +1,14 @@
+@model Product
+<div class="col-md-4 col-sm-12 my-3">
+    <div class="card" style="width: 18rem;">
+    <img width="400" height="250" src="@Model?.ImageUrl" class="card-img-top rounded shadow" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text"> <strong class="mx-2">₺</strong> @Model.Price</p>
+        <a class="btn btn-primary" asp-action="GetById" asp-route-id="@Model.Id" >
+            <i class="fa-solid fa-arrow-right"></i>
+                <strong class="mx-2"> Ürün Detayı </strong>
+        </a>
+    </div>
+    </div>
+</div>

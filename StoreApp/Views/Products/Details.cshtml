@@ -1,0 +1,23 @@
+@model Product
+
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="text-center">
+            <h6 class="display-6 mb-3">
+                @Model.Name
+            </h6>
+            <img width="400" class="img-fluid shadow rounded-3 mt-3" src="@Model?.ImageUrl"  alt="@Model?.Name" />
+            <p class="lead text-danger mt-4 fs-2"><strong>₺</strong> @Model?.Price</p>
+        </div>
+    </div>
+    <div class="col-md-12 mb-4 text-center">
+        <a asp-action="Index" asp-controller="Products" class="btn btn-primary">
+            <i class="fa-solid fa-list"></i>
+            Products</a>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary">
+            <i class="fa-solid fa-house"></i>
+            Home</a>
+    </div>
+</div>
+
+

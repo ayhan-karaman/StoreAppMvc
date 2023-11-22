@@ -1,0 +1,45 @@
+@model List<Category>
+<div class="col-sm-12 col-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Categories</h6>
+                            <div class="mb-0 w-100 d-flex px-4 mb-3 justify-content-end">
+                                   <a asp-action="Create" asp-controller="" asp-area="Admin" class="btn fs-5 btn-outline-success mr-4  right-0">
+                                    New Category 
+                                        <i class="fa-regular  fa-square-plus ms-3"></i>
+                                    </a>
+                            </div>
+                            <table class="table table-hover table-striped table-responsive w-100 d-block d-md-table">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th scope="col">#ID</th>
+                                        <th scope="col">Cateogory Name</th>
+                                        <th scope="col">Operations</th>
+                                     
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var category in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row">@category.Id</th>
+                                            <td>@category.Name</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a class="btn btn-warning" asp-action="" asp-controller="" asp-area="Admin" asp-route-id="@category.Id">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger" asp-action="" asp-controller="" asp-area="Admin" asp-route-id="@category.Id">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    <a class="btn btn-info" asp-action="Index" target="_blank" asp-controller="Products" asp-area="">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>

@@ -1,0 +1,11 @@
+@model IEnumerable<Category>
+<div class="display-5 text-center my-3">
+   <h5>Categories</h5>
+</div>
+<ul class="list-group">
+     <li class="list-group-item active">All Categories</li>
+     @foreach(var category in Model)
+     {
+        <li style="cursor:pointer;" class="list-group-item">@category.Name</li>
+     }
+</ul>

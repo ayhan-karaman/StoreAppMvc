@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+</head>
+<body>
+    <header>
+        @await Html.PartialAsync("~/Views/PartialViews/_Header.cshtml")
+        @await RenderSectionAsync("Header", required:false)
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+                @RenderBody()
+        </main>
+    </div>
+   
+    <footer>
+        @await RenderSectionAsync("Footer", required:false)
+        Footer
+    </footer>
+        <script src="~/lib/jquery/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/font-awesome/js/all.min.js"></script>
+        @await RenderSectionAsync("Scripts", required:false)
+</body>
+</html>

@@ -1,0 +1,42 @@
+@model ProductDtoForInsertion
+
+<div class="row">
+    <div class="col-sm-12 col-xl-12">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Product Add</h6>
+            <form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Product" asp-area="Admin">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="mb-3">
+                     <label asp-for="CategoryId" class="form-label">Category</label>
+                     <select asp-items="@ViewBag.Categories" asp-for="CategoryId"  class="form-control">
+                        <option selected disabled>Select Category</option>
+                     </select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Summary" class="form-label"></label>
+                    <input asp-for="Summary" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImageUrl" class="form-label"></label>
+                    <input type="file" name="file"  class="form-control" />
+                </div>
+            
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Save</button>
+                    <a class="btn btn-outline-primary" asp-action="Index" asp-area="Admin" asp-controller="Product">
+                     <i class="fa fa-list"></i> Products
+                    </a>
+                </div>      
+                    
+            </form>
+        </div>
+    </div>
+</div>
