@@ -1,0 +1,52 @@
+@page "/cart"
+@model CartModel
+@{
+    ViewData["Title"] = "Cart ";
+}
+
+<div class="container">
+    <div class="text-center display-6">
+         Cart
+    </div>
+    <table class="table table-hover">
+          <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Subtotal</th>
+                <th>Operations</th>
+              </tr>
+          </thead>
+          <tbody>
+              @foreach(var line in Model.Cart?.Lines ?? Enumerable.Empty<CartLine>())
+                {
+                    <tr>
+                        <td>@line.Product.Name</td>
+                        <td>@line.Quantity</td>
+                        <td>₺ @line.Product.Price</td>
+                        <td>₺ @((line.Product.Price * line.Quantity))</td>
+                        <td>
+                            <form method="post" asp-page-handler="Remove">
+                                <input type="hidden" name="id" value="@line.Product.Id">
+                                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash me-2"></i> Remove
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+          </tbody>
+          <tfoot>
+                <tr>
+                    <th colspan="3" class="text-right">Total: </th>
+                   
+                    <th></th>
+                     <th class="text-right text-danger">
+                       ₺ @Model.Cart?.ComputeTotalValue()
+                    </th>
+                </tr>
+          </tfoot>
+    </table>
+</div>

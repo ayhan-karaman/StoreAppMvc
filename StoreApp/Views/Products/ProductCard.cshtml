@@ -5,10 +5,19 @@
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
         <p class="card-text"> <strong class="mx-2">₺</strong> @Model.Price</p>
-        <a class="btn btn-primary" asp-action="GetById" asp-route-id="@Model.Id" >
-            <i class="fa-solid fa-arrow-right"></i>
-                <strong class="mx-2"> Ürün Detayı </strong>
-        </a>
+        <div class="btn-group">
+            <a class="btn btn-primary rounded-0" asp-action="GetById" asp-route-id="@Model.Id" >
+                <i class="fa-solid fa-arrow-right"></i>
+                    <strong class="mx-2"> Ürün Detayı </strong>
+            </a>
+            <form class="ms-10" id="@Model.Id" asp-page="/CartModel"  method="post">
+                <input type="hidden" asp-for="@Model.Id"  />
+                <input type="hidden" name="returnUrl" value="/Products/GetById/@Model.Id"  />
+                <button type="submit" class="btn btn-outline-warning rounded-0" >
+                    <i class="fa fa-cart-plus"></i>
+                </button>
+            </form>
+        </div>
     </div>
     </div>
 </div>

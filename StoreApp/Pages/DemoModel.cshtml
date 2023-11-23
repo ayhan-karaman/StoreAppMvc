@@ -1,0 +1,21 @@
+@page
+@model StoreApp.Pages.DemoModel
+@{
+    ViewData["Title"] = "DemoModel";
+}
+ <div class="container">
+      <div class="row d-flex justify-content-center align-items-center">
+           <div class="display-6 text-center my-3">
+              Hello @Model.FullName
+           </div>
+           <p class="my-3 text-danger text-center">@HttpContext.Session.GetString("name")</p>
+           <div class="col-md-5">
+                 <form method="post" asp-page="/DemoModel">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Enter your name" />
+                    </div>
+                    <button class="btn btn-success mt-3 w-100" type="submit">Submit</button>
+                 </form>
+           </div>
+      </div>
+ </div>
