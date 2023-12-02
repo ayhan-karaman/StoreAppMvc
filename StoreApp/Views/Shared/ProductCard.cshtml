@@ -4,16 +4,16 @@
     <img width="400" height="250" src="@Model?.ImageUrl" class="card-img-top rounded shadow" alt="...">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
-        <p class="card-text"> <strong class="mx-2">₺</strong> @Model.Price</p>
+        <p class="card-text">@Model.Summary</p>
+        <p class="card-text"> <strong>₺</strong> @Model.Price</p>
         <div class="btn-group">
-            <a class="btn btn-primary rounded-0" asp-action="GetById" asp-route-id="@Model.Id" >
+            <a title="Ürün Detayı" class="btn btn-outline-primary mx-1 rounded-2" asp-action="GetById" asp-controller="Products" asp-route-id="@Model.Id" >
                 <i class="fa-solid fa-arrow-right"></i>
-                    <strong class="mx-2"> Ürün Detayı </strong>
             </a>
             <form class="ms-10" id="@Model.Id" asp-page="/CartModel"  method="post">
                 <input type="hidden" asp-for="@Model.Id"  />
-                <input type="hidden" name="returnUrl" value="/Products/GetById/@Model.Id"  />
-                <button type="submit" class="btn btn-outline-warning rounded-0" >
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"  />
+                <button title="Sepete Ekle" type="submit" class="btn btn-outline-warning mx-1 rounded-2" >
                     <i class="fa fa-cart-plus"></i>
                 </button>
             </form>

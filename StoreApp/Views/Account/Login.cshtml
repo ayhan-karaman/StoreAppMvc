@@ -1,0 +1,36 @@
+@model LoginModel
+<div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+        <div class="text-center py-3">
+
+            <h5 class="display-5">
+                <i class="fa-solid fa-right-to-bracket bg-primary text-white p-3 rounded-circle mb-2"></i>
+                <br />
+                Login
+            </h5>
+        </div>
+        <div class="text-center my-3">
+            <div class="text-danger" asp-validation-summary="All"></div>
+        </div>
+        <div class="bg-light p-5 shadow rounded-3">
+
+            <form method="post" asp-action="Login" asp-controller="Account">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" id="Name" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input type="password" asp-for="Password" class="form-control" id="Password">
+                </div>
+
+                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i>
+                    Sign in</button>
+                <p class="text-center mb-0">Don't have an Account? <a class="ms-2" asp-action="Register" asp-controller="Account">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+</div>

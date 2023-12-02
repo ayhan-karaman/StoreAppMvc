@@ -1,0 +1,13 @@
+@model IEnumerable<Product>
+
+<div class="display-6 text-center">
+    <h5>Showcase</h5>
+</div>
+<div class="row">
+    @foreach(var product in Model)
+    {
+        <div class="col-3">
+            <partial name="ProductCard" model="product" />
+        </div>
+    }
+</div>

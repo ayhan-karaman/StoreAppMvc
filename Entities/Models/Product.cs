@@ -14,6 +14,7 @@ namespace Entities.Models
         public decimal Price { get; set; }
         public string? Summary { get; set; }
         public string? ImageUrl { get; set; }
+        public bool ShowCase { get; set; }
         public Category? Category { get; set; } // Navigation Property
     }
 }

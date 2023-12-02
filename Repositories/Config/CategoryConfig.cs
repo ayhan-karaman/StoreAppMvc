@@ -19,9 +19,9 @@ namespace Repositories.Config
             builder.HasMany(x => x.Products);
             builder
             .HasData(
-                new Category{Id = 1, Name = "Electronic"},
-                new Category{Id = 2, Name = "Beyaz Eşya"},
-                new Category{Id = 3, Name = "Hırdavat"}
+                new Category{Id = 1, Name = "Elektronik"},
+                new Category{Id = 2, Name = "Kitap"},
+                new Category{Id = 3, Name = "Mobilya"}
             );
         }
     }

@@ -1,16 +1,19 @@
-@model List<Product>
+@model ProductListViewModel
     <div class="row">
         <div class="col-3">
             @await Component.InvokeAsync("CategoryList")
+            @await Component.InvokeAsync("ProductFilterMenu")
+            <div products="" number="6" class="mt-2"></div>
         </div>
         <div class="col-9">
             <div class="row">
-                @foreach(var product in Model)
+                @foreach(var product in Model.Products)
                 {
                 
                     <partial name="ProductCard" model="product" />
                 
                 }
+                     <div page-model="@Model.Pagination"  page-action="Index"></div>
             </div>
         </div>
     </div>

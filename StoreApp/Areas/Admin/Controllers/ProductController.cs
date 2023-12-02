@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Entities.Dtos;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -15,6 +16,7 @@ using Services.Contracts;
 namespace StoreApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
        private readonly IServiceManager _manager;

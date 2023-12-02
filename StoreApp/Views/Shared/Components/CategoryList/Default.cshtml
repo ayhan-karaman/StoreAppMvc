@@ -1,11 +1,18 @@
 @model IEnumerable<Category>
-<div class="display-5 text-center my-3">
-   <h5>Categories</h5>
+<div class="mt-4">
+   <h6 class="lead">
+      <i class="fa-solid fa-bars text-primary"></i>
+      Categories</h6>
 </div>
 <ul class="list-group">
-     <li class="list-group-item active">All Categories</li>
+     
+      <a style="cursor:pointer;" class="list-group-item list-group-item-action @(ViewBag.CategoryId == null ? "active" : "") " asp-action="Index">All Categories</a>
+  
      @foreach(var category in Model)
      {
-        <li style="cursor:pointer;" class="list-group-item">@category.Name</li>
+         <a style="cursor:pointer;" class="list-group-item list-group-item-action @(ViewBag.CategoryId == category.Id ? "active" : "") " asp-action="Index" asp-route-categoryId="@category.Id">
+            @category.Name
+         </a>
+     
      }
 </ul>

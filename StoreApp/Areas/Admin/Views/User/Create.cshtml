@@ -1,0 +1,63 @@
+@model UserDtoForCreation
+
+<div class="row h-100 align-items-center justify-content-center py-2">
+
+    <div class="col-sm-12 col-xl-6">
+        <div class="text-center py-3">
+
+            <h5 class="display-5">
+                <i class="fa-solid fa-user-plus bg-primary text-white p-3 rounded-5 mb-2"></i>
+                <br />
+                Create User
+            </h5>
+        </div>
+        <div class="text-center my-3">
+            <div class="text-danger" asp-validation-summary="All"></div>
+        </div>
+        <div class="bg-light p-5 rounded-3">
+
+            <form method="post" asp-action="Create" >
+
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label"></label>
+                    <input asp-for="UserName" class="form-control" id="Name" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" id="Email" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="PhoneNumber" class="form-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" id="PhoneNumber" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input type="password" asp-for="Password" class="form-control" id="Password">
+                </div>
+                <div class="my-3">
+                    <h6>Roles </h6>
+                    <div class="d-flex flex-wrap my-2">
+                        @foreach (var item in Model.Roles)
+                        {
+                            <div class="form-check my-2 mx-2">
+                                <input type="checkbox" name="Roles" value="@item" class="form-check-input">
+                                <label class="form-check-label"> @item </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="btn-group my-3 py-2 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary  ">
+                    <i class="fa-solid fa-user-plus me-2"></i>
+                    Save </button>
+                    <a asp-action="Index"  class="btn btn-outline-primary">
+                    <i class="fa-solid fa-arrow-left me-2"></i>
+                    Back </a>
+
+
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

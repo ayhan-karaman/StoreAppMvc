@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Services.Contracts;
+using StoreApp.Infrastructure.Extensions;
 
 namespace StoreApp.Pages
 {
@@ -34,8 +35,9 @@ namespace StoreApp.Pages
             if(product is not null)
             {
                 Cart.AddItem(product, 1);
+               
             } 
-            return Page();
+            return RedirectToPage(new {returnUrl = returnUrl});
         }
 
         public IActionResult OnPostRemove(int id, string returnUrl)
