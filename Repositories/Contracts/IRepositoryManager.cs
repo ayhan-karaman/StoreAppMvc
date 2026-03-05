@@ -10,6 +10,7 @@ namespace Repositories.Contracts
         IProductRepository ProductRepository { get; }
         ICateogoryRepository CateogoryRepository { get; }
         IOrderRepository OrderRepository { get; }
+        IAddressRepository AddressRepository { get; }
 
         void SaveChanges();
 

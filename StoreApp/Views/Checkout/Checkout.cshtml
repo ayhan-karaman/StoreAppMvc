@@ -1,0 +1,157 @@
+
+@model CheckoutDto
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-10 py-2">
+        <div class="row d-flex justify-content-between">
+
+            <div class="col-md-7">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="text-danger" asp-validation-summary="All"></div>
+                        <div class="progress mb-4">
+                            <div id="checkoutProgress" class="progress-bar" role="progressbar"
+                                 style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
+                                Adım 1/2
+                            </div>
+                        </div>
+
+                        <form method="post" asp-controller="Checkout" asp-action="Checkout">
+                           
+                            <ul id="checkout-tab-list" class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#buyer">Alıcı</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#shipping">Teslimat</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#payment">Ödeme</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="buyer">
+                                 
+                                    <!-- Alıcı Bilgi formu -->
+                                    @await Html.PartialAsync("/Views/PartialViews/CheckoutPartials/_BuyerPartial.cshtml", Model)
+
+                                    <div class="mt-3 p-2 w-100 d-flex justify-content-end">
+                                        <button type="button" class="btn btn-primary" onclick="goToTab('shipping')" data-bs-toggle="tab" href="#shipping">Next</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show" id="shipping">
+                                    <!-- Teslimat formu -->
+                                   @await Html.PartialAsync("/Views/PartialViews/CheckoutPartials/_ShippingPartial.cshtml", Model)
+                                   
+                                    <div class="mt-3 p-2 d-flex justify-content-between w-100">
+                                        <button type="button" class="btn btn-secondary" onclick="goToTab('buyer')" data-bs-toggle="tab" href="#buyer">Prev</button>
+                                        <button type="button" class="btn btn-primary" onclick="goToTab('payment')" data-bs-toggle="tab" href="#payment">Next</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="payment">
+                                    <!-- Ödeme formu -->
+                                    @await Html.PartialAsync("/Views/PartialViews/CheckoutPartials/_PaymentCardPartial.cshtml", Model)
+
+                                    <div class="mt-3 p-2 d-flex justify-content-start w-100">
+                                        <button type="button" class="btn btn-secondary" onclick="goToTab('shipping')" data-bs-toggle="tab" href="#shipping">Prev</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input asp-for="Is3DSPay" class="form-check-input" type="checkbox" id="Is3DSPay">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    3DS İle Öde
+                                </label>
+                            </div>
+
+
+
+                            <div class="text-center my-3">
+                                <button type="submit" class="btn btn-primary">Complete Order</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card w-100">
+                    <div class="card-header bg-success text-white">Sepet Bilgileri</div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Ürün Adı</th>
+                                    <th>Birim Fiyat</th>
+                                    <th>Adet</th>
+                                    <th>Toplam</th>
+                                </tr>
+                            </thead>
+                           
+                                <tbody>
+
+                                    @foreach (var line in Model.Lines)
+                                    {
+                                        <tr>
+                                            <td>@line.Product.Name</td>
+                                            <td>@line.Product.Price₺</td>
+                                            <td>@line.Quantity</td>
+                                            <td> @(line.Quantity* line.Product.Price)₺</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="3" class="text-right">Total: </th>
+
+
+                                        <th class="text-right text-danger">
+                                            @Model.Lines.Sum(e => e.Product.Price * e.Quantity)₺
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                           
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function goToTab(tabId) {
+          var triggerEl = document.querySelector('[href="#' + tabId + '"]');
+          var tab = new bootstrap.Tab(triggerEl);
+          tab.show();
+        const len = document.getElementById('checkout-tab-list').children.length;
+        const progress = document.getElementById('checkoutProgress');
+        let percent = 33;
+        let page= 1;
+
+
+        if (tabId === "buyer") {
+          page = 1;
+          percent = 33
+        } else if (tabId === "shipping") {
+          page = 2;
+          percent = 66;
+        } else if (tabId === "payment") {
+          page = 3;
+          percent = 100;
+        }
+
+        progress.style.width = percent + "%";
+        progress.setAttribute("aria-valuenow", percent);
+        progress.innerText = `${page}/${len}`
+
+
+        }
+    </script>
+
+
+}

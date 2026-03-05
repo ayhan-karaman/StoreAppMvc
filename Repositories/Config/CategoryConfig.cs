@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,10 +9,10 @@ namespace Repositories.Config
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.ToTable("categories");
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasColumnName("category_id");
-            builder.Property(x => x.Name).HasColumnName("category_name");
+            //builder.ToTable("categories");
+            //builder.HasKey(x => x.Id);
+            //builder.Property(x => x.Id).HasColumnName("category_id");
+            //builder.Property(x => x.Name).HasColumnName("category_name");
             builder.HasMany(x => x.Products);
             builder
             .HasData(

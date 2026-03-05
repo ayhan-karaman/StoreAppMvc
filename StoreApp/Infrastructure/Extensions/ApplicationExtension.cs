@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Entities.Models.IdentityUser;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -36,24 +33,24 @@ namespace StoreApp.Infrastructure.Extensions
         {
             const string adminUser = "Admin";
             const string password = "Admin+123456";
-
+         
             // UserManager
-            UserManager<IdentityUser> userManager =
+            UserManager<AppUser> userManager =
             app.ApplicationServices
             .CreateScope()
             .ServiceProvider
-            .GetRequiredService<UserManager<IdentityUser>>();
+            .GetRequiredService<UserManager<AppUser>>();
 
             // RoleManager
-            RoleManager<IdentityRole> roleManager = app
+            RoleManager<AppRole> roleManager = app
             .ApplicationServices
             .CreateScope()
             .ServiceProvider
-            .GetRequiredService<RoleManager<IdentityRole>>();
-            IdentityUser? user = await userManager.FindByNameAsync(adminUser);
+            .GetRequiredService<RoleManager<AppRole>>();
+            AppUser? user = await userManager.FindByNameAsync(adminUser);
             if(user is null)
             {
-                user = new IdentityUser()
+                user = new AppUser()
                 {
                     Email = "krmn@gmail.com",
                     PhoneNumber = "5351112233",

@@ -1,0 +1,61 @@
+﻿@using Entities.Models.IdentityUser
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+
+
+
+
+@model CheckoutDto
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+        <label for="Name">Ad</label>
+        <input asp-for="Buyer.Name"  class="form-control" id="Name"  required />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="Surname">Soyad</label>
+        <input asp-for="Buyer.Surname"  class="form-control" id="Surname"  required />
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="GsmNumber">Telefon</label>
+        <input asp-for="Buyer.GsmNumber" type="tel" class="form-control" id="GsmNumber"  required />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="Email">E-posta</label>
+        <input asp-for="Buyer.Email" type="email" class="form-control" id="Email"  required />
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="IdentityNumber">Kimlik No</label>
+        <input asp-for="Buyer.IdentityNumber"  class="form-control" id="IdentityNumber"  required />
+    </div>
+  
+   
+    <input type="hidden" asp-for="Buyer.RegistrationDate" value="@(currentUser.RegistrationDate.ToString("yyyy-MM-dd HH:mm:ss"))" class="form-control" id="RegistrationDate" />
+    <input type="hidden" asp-for="Buyer.LastLoginDate" value="@(currentUser.LastLoginDate?.ToString("yyyy-MM-dd HH:mm:ss"))" class="form-control" id="LastLoginDate" />
+    <input type="hidden" asp-for="Buyer.RegistrationAddress" value="@(string.IsNullOrEmpty(currentUser.RegistrationAddress) ? currentUser.LastLoginIp : currentUser.RegistrationAddress)" class="form-control" id="RegistrationAddress" />
+    <input type="hidden" asp-for="Buyer.Ip" value="@(currentUser.LastLoginIp)" class="form-control" id="Ip" />
+ 
+
+  
+    <div class="col-md-6 mb-3">
+        <label for="City">Şehir</label>
+        <input asp-for="Buyer.City"  class="form-control" id="City"  required />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="Country">Ülke</label>
+        <input asp-for="Buyer.Country"  class="form-control" id="Country"  required />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="ZipCode">Posta Kodu</label>
+        <input asp-for="Buyer.ZipCode"  class="form-control" id="ZipCode" required />
+    </div>
+
+
+</div>

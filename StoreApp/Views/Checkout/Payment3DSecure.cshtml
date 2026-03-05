@@ -1,0 +1,14 @@
+﻿@model PaymentViewModel
+
+<h2>Ödeme Onayı (3D Secure)</h2>
+
+@if (!string.IsNullOrEmpty(Model.HtmlContent))
+{
+  
+     @Html.Raw(Model.HtmlContent)
+   
+}
+else
+{
+    <p>Ödeme içeriği bulunamadı.</p>
+}

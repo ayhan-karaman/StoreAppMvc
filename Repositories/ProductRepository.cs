@@ -36,7 +36,9 @@ namespace Repositories
         }
 
         public Product? GetOneProduct(int id, bool tracking)
-        => FindByCondition(x => x.Id == id, tracking);
+        {
+            return FindByCondition(x => x.Id == id, tracking);
+        }
 
         public List<Product> GetShowcaseProducts(bool tracking)
         => FindAll(tracking).Where(x => x.ShowCase.Equals(true)).ToList();

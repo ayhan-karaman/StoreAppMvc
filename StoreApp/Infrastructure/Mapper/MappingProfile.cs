@@ -7,6 +7,8 @@ using Entities.Dtos;
 using Entities.Dtos.CategoryDtos;
 using Entities.Dtos.IdentityDtos;
 using Entities.Models;
+using Entities.Models.Payments;
+using Iyzipay.Request;
 using Microsoft.AspNetCore.Identity;
 
 namespace StoreApp.Infrastructe.Mapper
@@ -22,6 +24,11 @@ namespace StoreApp.Infrastructe.Mapper
 
             CreateMap<UserDtoForCreation, IdentityUser>();
             CreateMap<UserDtoForUpdate, IdentityUser>().ReverseMap();
+
+
+            CreateMap<Address,  Iyzipay.Model.Address>().ReverseMap();
+            CreateMap<Buyer,  Iyzipay.Model.Buyer>().ReverseMap();
+            CreateMap<PaymentCard,  Iyzipay.Model.PaymentCard>().ReverseMap();
         }
     }
 }

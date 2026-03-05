@@ -1,0 +1,27 @@
+﻿
+@model CheckoutDto
+<div class="row mt-3">
+    
+    <div class="col-md-12 mb-3">
+        <label for="ContactName">İletişim Adı</label>
+        <input asp-for="Address.ContactName" class="form-control" id="ContactName" required  />
+    </div>
+
+    <div class="col-md-5 mb-3">
+        <label asp-for="Address.Country">Ülke</label>
+        <input asp-for="Address.Country" class="form-control" id="Country"  required />
+    </div>
+    <div class="col-md-5 mb-3">
+        <label for="City">Şehir</label>
+        <input asp-for="Address.City"  class="form-control" id="City"  required />
+    </div>
+    <div class="col-md-2 mb-3">
+        <label for="ZipCode">Posta Kodu</label>
+        <input asp-for="Address.ZipCode"  class="form-control" id="ZipCode"  required />
+    </div>
+
+    <div class="col-md-12 mb-3">
+        <label for="Description">Açıklama</label>
+        <textarea asp-for="Address.Description" class="form-control" id="Description"  rows="3"></textarea>
+    </div>
+</div>

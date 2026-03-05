@@ -1,0 +1,43 @@
+﻿
+
+@model CheckoutDto
+
+
+
+<div class="row mt-3">
+    <!-- CardHolderName tek satır -->
+    <div class="col-md-12 mb-3">
+      <label for="CardHolderName">Kart Sahibi</label>
+      <input asp-for="PaymentCard.CardHolderName" type="text" class="form-control" id="CardHolderName"  required />
+    </div>
+
+    <!-- CardNumber tek satır -->
+    <div class="col-md-12 mb-3">
+      <label for="CardNumber">Kart Numarası</label>
+        <input asp-for="PaymentCard.CardNumber" type="text" class="form-control" id="CardNumber"  required />
+    </div>
+
+    <!-- ExpireMonth, ExpireYear, Cvc yan yana -->
+    <div class="col-md-4 mb-3">
+      <label for="ExpireMonth">Son Kullanma Ayı</label>
+        <input asp-for="PaymentCard.ExpireMonth" type="text" class="form-control" id="ExpireMonth"  required />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="ExpireYear">Son Kullanma Yılı</label>
+        <input asp-for="PaymentCard.ExpireYear" type="text" class="form-control" id="ExpireYear"  required />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="Cvc">CVC</label>
+        <input asp-for="PaymentCard.Cvc" type="text" class="form-control" id="Cvc"  required />
+    </div>
+
+    <!-- RegisterCard tek satır -->
+    <div class="col-md-12 mb-3">
+      <label for="RegisterCard">Kartı Kaydet</label>
+      <select class="form-control" id="RegisterCard" asp-for="PaymentCard.RegisterCard">
+        <option value="0">Hayır</option>
+        <option value="1">Evet</option>
+      </select>
+    </div>
+  </div>
+

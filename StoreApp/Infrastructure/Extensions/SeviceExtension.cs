@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Entities.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Entities.Models.IdentityUser;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -19,14 +16,14 @@ namespace StoreApp.Infrastructure.Extensions
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
              services.AddDbContext<RepositoryContext>(options => {
-                options.UseNpgsql(configuration.GetConnectionString("PostgreSQL"), b => b.MigrationsAssembly("StoreApp"));
+                options.UseSqlServer(configuration.GetConnectionString("SqlServer"), b => b.MigrationsAssembly("StoreApp"));
                 options.EnableSensitiveDataLogging(true);
              });
         }
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>(options => 
+            services.AddIdentity<AppUser, AppRole>(options => 
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
@@ -56,6 +53,7 @@ namespace StoreApp.Infrastructure.Extensions
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICateogoryRepository, CategoryRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
         }
         public static void ConfigureServiceRegistration(this IServiceCollection services)
         {
@@ -64,6 +62,8 @@ namespace StoreApp.Infrastructure.Extensions
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IOrderService, OrderManager>();
             services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<IAdressService, AddressManager>();
+            services.AddScoped<IPaymentService, PaymentManager>();
         }
 
         public static void ConfigureRouting(this IServiceCollection services)

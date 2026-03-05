@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Entities.Dtos.IdentityDtos;
+using Entities.Models.IdentityUser;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,10 +14,10 @@ namespace StoreApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,14 +36,19 @@ namespace StoreApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromForm] LoginModel model)
         {
-            if(ModelState.IsValid)
+            
+
+            if (ModelState.IsValid)
             {
-                IdentityUser? user = await _userManager.FindByNameAsync(model.Name);
+                AppUser? user = await _userManager.FindByNameAsync(model.Name);
                 if(user is not null)
                 {
                     await _signInManager.SignOutAsync();
                     if((await _signInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded)
                     {
+                        user.LastLoginDate = DateTime.UtcNow;
+                        user.LastLoginIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+                        await _userManager.UpdateAsync(user);
                         return Redirect(model.ReturnUrl ?? "/");
                     }
                 }
@@ -66,16 +72,26 @@ namespace StoreApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([FromForm] RegisterDto model)
         {
-            
-                var user = new IdentityUser()
+
+                var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+                if (Request.Headers.ContainsKey("X-Forwarded-For"))
+                {
+                    ip = Request.Headers["X-Forwarded-For"].FirstOrDefault();
+                }
+
+            var user = new AppUser()
                 {
                     UserName = model.UserName,
-                    Email = model.Email
+                    Email = model.Email,
+                    RegistrationAddress =  ip,
+                   
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if(result.Succeeded)
                 {
+                 
                     var roleResult = await _userManager.AddToRoleAsync(user, "User");
                     if(roleResult.Succeeded)
                     {

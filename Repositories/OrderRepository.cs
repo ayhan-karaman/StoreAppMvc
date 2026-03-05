@@ -46,6 +46,10 @@ namespace Repositories
             {
                 _context.Orders.Add(order);
             }
+            else
+            {
+                 _context.Orders.Update(order);
+            }
         }
     }
 }
